@@ -1,0 +1,36 @@
+<canvas #canvas="" width="280" height="280"></canvas>
+    
+<button class="btn btn-warn" (click)="clear()">Clear</button>
+<button class="btn btn-primary" (click)="predict()">
+Predict
+</button>
+<br>
+<!-- File Upload -->
+<div class="upload-section">
+<h3>Or Upload a Sketch</h3>
+<input type="file" #fileInput accept="image/png,image/jpeg" (change)="onFileSelected($event)" />
+<button class="btn btn-upload" (click)="predictFromFile()" >
+    Predict File
+</button>
+</div>
+
+<!-- Result -->
+<div class="result" *ngIf="prediction">
+    test
+<div class="card">
+    <div class="card-header">
+    <h2>Prediction</h2>
+    </div>
+    <div class="card-content">
+    <p><strong>Class:</strong> {{ prediction.predicted_class }}</p>
+    <p><strong>Confidence:</strong> {{ (prediction.confidence * 100).toFixed(1) }}%</p>
+
+    <h4>Top 3 Predictions</h4>
+    <ul>
+        <li *ngFor="let item of prediction.top_predictions">
+        {{ item.class }} - {{ (item.confidence * 100).toFixed(1) }}%
+        </li>
+    </ul>
+    </div>
+</div>
+</div>
