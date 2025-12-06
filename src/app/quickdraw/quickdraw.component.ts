@@ -20,6 +20,7 @@ export class QuickdrawComponent {
   isPredicting = false;
   error: string | null = null;
   selectedFile: File | null = null;
+  base64Output: string = ''
   // Change to your Flask server URL
   private apiUrl = '/api/ai/quickdraw/detect';
 
@@ -72,7 +73,23 @@ export class QuickdrawComponent {
    predict() {
     this.isPredicting = true;
     this.error = null;
-
+    
+    // const dataURL = this.canvas.nativeElement.toDataURL('image/png'); // Default is 'image/png'
+      
+    // Assign the result to the output variable
+    // this.base64Output = dataURL;
+    // this.base64Output = this.base64Output.split(';base64')[1]
+    // console.log('Base64 data URL:', this.base64Output);
+    // this.http.post<any>(this.apiUrl, {'image':this.base64Output}).subscribe({
+    //     next: (res) => {
+    //       this.prediction = res;
+    //       this.isPredicting = false;
+    //     },
+    //     error: (err) => {
+    //       this.error = err.error?.error || 'Prediction failed. Is the server running?';
+    //       this.isPredicting = false;
+    //     }
+    // })
     this.canvas.nativeElement.toBlob((blob) => {
       if (!blob) {
         this.error = 'Failed to capture canvas';
