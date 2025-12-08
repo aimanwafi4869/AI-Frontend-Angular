@@ -1,37 +1,53 @@
-<div>Draw : anvil,banana,bowtie,butterfly,cake,carrot,cat,clock,mushroom,cup,door,dog,eye,fish,hexagon,moon,ice cream,pizza,umbrella,circle,star,triangle,apple,car,house,tree,cloud,face,flower,bird</div>
-<canvas #canvas="" width="280" height="280"></canvas>
-    
-<button class="btn btn-warn" (click)="clear()">Clear</button>
-<button class="btn btn-primary" (click)="predict()">
-Predict
-</button>
+<div>
+    <span>Stroke Thickness: <b>{{lineWidth}}</b><br>
+        <input type="range" min="1" [(ngModel)]="lineWidth">
+    </span>
+</div>
+
+<div>
+    <span>
+        Canvas Width: <b>{{canvasWidth}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Canvas Height: <b>{{canvasHeight}}</b><br>
+        <input type="number" min="1" [(ngModel)]="canvasWidth">&nbsp;
+        <input type="number" min="1" [(ngModel)]="canvasHeight">
+    </span>
+    <span>
+    </span>
+</div>
 <br>
-<!-- File Upload -->
-<div class="upload-section">
-<h3>Or Upload a Sketch</h3>
-<input type="file" #fileInput accept="image/png,image/jpeg" (change)="onFileSelected($event)" />
-<button class="btn btn-upload" (click)="predictFromFile()" >
-    Predict File
-</button>
-</div>
+<div>
+    <canvas #canvas="" width="{{canvasWidth}}" height="{{canvasHeight}}" style="border:1px solid #000;"></canvas>
+        
+    <button class="btn btn-warn" (click)="clear()">Clear</button>
+    <button class="btn btn-primary" (click)="predict()">
+    Predict
+    </button>
+    <br>
 
-<!-- Result -->
-<div class="result" *ngIf="prediction">
-    test
-<div class="card">
-    <div class="card-header">
-    <h2>Prediction</h2>
-    </div>
-    <div class="card-content">
-    <p><strong>Class:</strong> {{ prediction.predicted_class }}</p>
-    <p><strong>Confidence:</strong> {{ (prediction.confidence * 100).toFixed(1) }}%</p>
+    <!-- Result -->
+    <div class="result" *ngIf="prediction">
+        <div class="card">
+            <div class="card-header">
+            <h2>Prediction</h2>
+            </div>
+            <div class="card-content">
+            <p><strong>Class:</strong> {{ prediction.predicted_class }}</p>
+            <p><strong>Confidence:</strong> {{ (prediction.confidence * 100).toFixed(1) }}%</p>
 
-    <h4>Top 3 Predictions</h4>
-    <ul>
-        <li *ngFor="let item of prediction.top_predictions">
-        {{ item.class }} - {{ (item.confidence * 100).toFixed(1) }}%
-        </li>
-    </ul>
+            <h4>Top 3 Predictions</h4>
+            <ul>
+                <li *ngFor="let item of prediction.top_predictions">
+                {{ item.class }} - {{ (item.confidence * 100).toFixed(1) }}%
+                </li>
+            </ul>
+            </div>
+        </div>
     </div>
 </div>
+<div>
+    List of available class:
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr *ngFor="let row of tableRows">
+            <td *ngFor="let label of row">{{ label }}</td>
+        </tr>
+    </table>
 </div>
