@@ -18,7 +18,7 @@ export class QuickdrawComponent {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   private ctx!: CanvasRenderingContext2D;
   private drawing = false;
-  lineWidth = 5; 
+  lineWidth = 15; 
   labels: string[] = [
   "airplane", "alarm clock", "ambulance", "angel", "animal migration", "ant", "anvil",
   "apple", "arm", "asparagus", "axe", "backpack", "banana", "bandage", "barn",

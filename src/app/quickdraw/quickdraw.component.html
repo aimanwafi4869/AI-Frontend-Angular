@@ -10,19 +10,15 @@
         <input type="number" min="1" [(ngModel)]="canvasWidth">&nbsp;
         <input type="number" min="1" [(ngModel)]="canvasHeight">
     </span>
-    <span>
-    </span>
 </div>
 <br>
 <div>
     <canvas #canvas="" width="{{canvasWidth}}" height="{{canvasHeight}}" style="border:1px solid #000;"></canvas>
-        
-    <button class="btn btn-warn" (click)="clear()">Clear</button>
-    <button class="btn btn-primary" (click)="predict()">
-    Predict
-    </button>
     <br>
-
+    <span>
+        <button class="btn btn-warn" (click)="clear()">Clear</button>&nbsp;
+        <button class="btn btn-primary" (click)="predict()">Predict</button>
+    </span>
     <!-- Result -->
     <div class="result" *ngIf="prediction">
         <div class="card">
@@ -43,8 +39,9 @@
         </div>
     </div>
 </div>
+    <br>
 <div>
-    List of available class:
+    List of available class:<br><br>
     <table border="1" cellpadding="5" cellspacing="0">
         <tr *ngFor="let row of tableRows">
             <td *ngFor="let label of row">{{ label }}</td>
