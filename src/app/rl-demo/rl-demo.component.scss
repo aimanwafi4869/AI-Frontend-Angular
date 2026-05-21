@@ -1,0 +1,18 @@
+.traffic-box {
+  width: 120px;
+  background: #222;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.light {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #333;
+  margin: 10px auto;
+}
+
+.red.on { background: red; }
+.yellow.on { background: yellow; }
+.green.on { background: limegreen; }

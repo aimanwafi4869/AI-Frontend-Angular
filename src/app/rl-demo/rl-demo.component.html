@@ -1,0 +1,15 @@
+<div class="traffic-box">
+  <div class="light red"
+       [class.on]="color === 'Red' && state === 'Normal'"></div>
+
+  <div class="light yellow"
+       [class.on]="color === 'Yellow' && (state === 'Normal' || blinkOn)"></div>
+
+  <div class="light green"
+       [class.on]="color === 'Green' && state === 'Normal'"></div>
+</div>
+
+<p>State: {{ state }}</p>
+<p>Action Taken: {{ action }}</p>
+<p>Reward: {{ reward }}</p>
+<p>Accumulate Reward: {{ totalReward }}</p>

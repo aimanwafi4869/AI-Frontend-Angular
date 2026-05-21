@@ -1,0 +1,50 @@
+<div class="camera-container">
+  <!-- Video stream -->
+  <video #video width="400" height="300" autoplay></video>
+
+  <!-- Capture button -->
+  <button (click)="capture()">Capture</button>
+
+  <!-- Display captured image -->
+  <img *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" />
+  <div *ngIf="segmentedImage" class="image-box">
+    <h3>Segmented Image (Canny + Contour)</h3>
+    <img [src]="segmentedImage" alt="Segmented result" />
+  </div>
+  <div class="result" *ngIf="prediction">
+        <div class="card">
+            <div class="card-header">
+            <h2>Prediction Custom CNN Model</h2>
+            </div>
+            <div class="card-content">
+            <p><strong>Class:</strong> {{ resultA.predicted_class }}</p>
+            <p><strong>Confidence:</strong> {{ (resultA.confidence * 100).toFixed(1) }}%</p>
+
+            <h4>Top 3 Predictions</h4>
+            <ul>
+                <li *ngFor="let item of resultA.top_predictions">
+                {{ item.class }} - {{ (item.confidence * 100).toFixed(1) }}%
+                </li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="result" *ngIf="prediction">
+        <div class="card">
+            <div class="card-header">
+            <h2>Prediction EfficientNetV2S Model</h2>
+            </div>
+            <div class="card-content">
+            <p><strong>Class:</strong> {{ resultB.predicted_class }}</p>
+            <p><strong>Confidence:</strong> {{ (resultB.confidence * 100).toFixed(1) }}%</p>
+
+            <h4>Top 3 Predictions</h4>
+            <ul>
+                <li *ngFor="let item of resultB.top_predictions">
+                {{ item.class }} - {{ (item.confidence * 100).toFixed(1) }}%
+                </li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
