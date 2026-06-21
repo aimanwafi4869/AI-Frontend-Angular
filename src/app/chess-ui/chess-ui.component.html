@@ -1,4 +1,4 @@
-<div style="text-align:center; padding: 20px;">
+<!-- <div style="text-align:center; padding: 20px;">
     <h1>Backend Camera Stream</h1>
     
     <img [src]="latestFrame" *ngIf="latestFrame" 
@@ -8,4 +8,19 @@
     <strong>Current FEN:</strong> 
     <pre style="background: #eee; padding: 10px;">{{ currentFen }}</pre>
     </div>
+    <div>
+    <strong>Current Move:</strong> 
+    <pre style="background: #eee; padding: 10px;">{{ move }}</pre>
+    </div>
+</div> -->
+
+<div class="chess-container">
+  <div class="board-grid">
+    <div 
+      *ngFor="let square of squares" 
+      [ngClass]="{'square': true, 'light-square': square.isLight, 'dark-square': !square.isLight}"
+      [attr.data-coord]="square.coordinate">
+      <span class="chess-piece">{{ square.symbol }}</span>
+    </div>
+  </div>
 </div>

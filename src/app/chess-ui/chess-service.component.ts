@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class ChessService {
   private socket = io('http://localhost:5000');
-  public stream$ = new Subject<{image: string, fen: string}>();
+  public stream$ = new Subject<{image: string, fen: string, move: string}>();
 
   constructor() {
     this.socket.on('board_update', (data) => {
