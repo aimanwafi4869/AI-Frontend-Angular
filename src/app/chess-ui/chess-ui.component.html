@@ -14,13 +14,61 @@
     </div>
 </div> -->
 
-<div class="chess-container">
+<!-- <div class="chess-container">
   <div class="board-grid">
     <div 
       *ngFor="let square of squares" 
       [ngClass]="{'square': true, 'light-square': square.isLight, 'dark-square': !square.isLight}"
       [attr.data-coord]="square.coordinate">
       <span class="chess-piece">{{ square.symbol }}</span>
+    </div>
+  </div>
+</div> -->
+
+<div class="chess-layout-wrapper">
+  <div class="chess-container">
+    <div class="board-grid">
+      <div 
+        *ngFor="let square of squares" 
+        [ngClass]="{'square': true, 'light-square': square.isLight, 'dark-square': !square.isLight}"
+        [attr.data-coord]="square.coordinate">
+        <span class="chess-piece">{{ square.symbol }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="move-history-container">
+    <h3>Move Log</h3>
+    <div class="table-scroll">
+      <table class="move-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>White</th>
+            <th>Black</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of moveHistory">
+            <td class="move-number">{{ entry.moveNumber }}.</td>
+            <td>{{ entry.white }}</td>
+            <td>{{ entry.black }}</td>
+          </tr>
+          <tr *ngIf="moveHistory.length === 0">
+            <td colspan="3" class="no-moves">No moves recorded yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="control-panel">
+      <button class="restart-btn" (click)="resetGame()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
+        Restart Game
+      </button>
     </div>
   </div>
 </div>

@@ -1,16 +1,36 @@
-.chess-container {
+// 1. Root Layout Container
+.chess-layout-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  padding: 2vh;
+  gap: 30px;
+  background-color: #161512; // Dark background to make the board pop
+  align-items: stretch; // Forces both columns to match height
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; // Disables accidental body scrollbars
 }
 
+// 2. Left Column: Board Wrapper
+.chess-container {
+  display: flex;
+  flex: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: #1e1e1a;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+// Scaled relative to viewport height so it fills the screen vertically
 .board-grid {
   display: grid;
-  grid-template-columns: repeat(8, min(12vw, 65px));
-  grid-template-rows: repeat(8, min(12vw, 65px));
-  border: 4px solid #2d2d2d;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  grid-template-columns: repeat(8, min(10.5vw, 10.5vh));
+  grid-template-rows: repeat(8, min(10.5vw, 10.5vh));
+  border: 6px solid #2d2d2d;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
 }
 
 .square {
@@ -21,7 +41,6 @@
   position: relative;
 }
 
-/* Classic subtle wood/tan board theme styling choices */
 .light-square {
   background-color: #f0d9b5;
   color: #b58863;
@@ -32,9 +51,128 @@
   color: #f0d9b5;
 }
 
+// Dynamic piece scaling based on grid cell footprint
 .chess-piece {
-  font-size: min(8vw, 2.5rem);
-  color: #000000; /* Handles rendering distinction via unicode variants */
+  font-size: min(7vw, 7.5vh);
+  color: #000000; 
   line-height: 1;
   z-index: 2;
+}
+
+// 3. Right Column: Move History Log Panel
+.move-history-container {
+  width: 380px; // Scaled wider to balance the huge layout
+  background-color: #262522;
+  color: #bababa;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column; // Layout hierarchy engine
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #fff;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #3d3b36;
+    padding-bottom: 12px;
+  }
+
+  // Flex grow fills the exact remaining container height perfectly
+  .table-scroll {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    padding-right: 4px;
+
+    /* Custom scrollbar matching dark theme */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #3d3b36;
+      border-radius: 4px;
+    }
+  }
+}
+
+.move-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 1.1rem; // Increased text size for scannability
+
+  th {
+    color: #797774;
+    font-weight: 600;
+    padding: 10px 8px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    position: sticky; // Keeps headers at top while scrolling logs
+    top: 0;
+    background-color: #262522;
+    z-index: 1;
+  }
+
+  tr:nth-child(even) {
+    background-color: #2b2925;
+  }
+
+  td {
+    padding: 12px 8px; // Padding boost
+    color: #dad9d7;
+
+    &.move-number {
+      color: #797774;
+      width: 15%;
+      font-weight: bold;
+    }
+  }
+
+  .no-moves {
+    text-align: center;
+    color: #797774;
+    padding: 40px 0;
+    font-style: italic;
+  }
+}
+
+// 4. Control Buttons Sticky Panel
+.control-panel {
+  border-top: 2px solid #3d3b36;
+  padding-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.restart-btn {
+  width: 100%;
+  background-color: #45433f;
+  color: #fff;
+  border: none;
+  padding: 14px 20px; // Larger touch/click area
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: #c4a54e; // Subtle accent highlight on hover
+    color: #121212;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
